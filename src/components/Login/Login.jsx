@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { singUpUser } = useContext(AuthContext);
+
+  const handelLoggedIn = (event) => {
+    event.preventDefault();
+    const from = event.target;
+    const email = from.email.value;
+    const password = from.password.value;
+    const confirm = from.password.value;
+    console.log(email, password, confirm);
+
+    singUpUser(email, password)
+      .then((result) => {
+        const logInUser = result.user;
+        console.log(logInUser);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
   return (
     <div className="max-w-5xl mx-auto">
       <h2 className="text-3xl my-5 text-center">Login</h2>
       <div className="w-full max-w-xs">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handelLoggedIn}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -31,7 +55,7 @@ const Login = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-black-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               name="password"
@@ -41,6 +65,22 @@ const Login = () => {
             <p className="text-red-500 text-xs italic">
               Please choose a password.
             </p>
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              for="password"
+            >
+              Confirm Password
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-password"
+              type="password"
+              name="confirm"
+              placeholder="Confirm Password"
+              required
+            />
           </div>
           <div className="flex items-center justify-between">
             <button
