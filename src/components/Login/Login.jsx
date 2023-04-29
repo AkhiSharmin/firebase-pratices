@@ -1,22 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const handelLogin = (event) => {
-    event.preventDefault();
-    const from = event.target;
-    const email = from.email.value;
-    const password = from.password.value;
-    console.log(email, password);
-  };
-
   return (
     <div className="max-w-5xl mx-auto">
       <h2 className="text-3xl my-5 text-center">Login</h2>
       <div className="w-full max-w-xs">
-        <form
-          onSubmit={handelLogin}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        >
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -66,6 +56,12 @@ const Login = () => {
               Forgot Password?
             </a>
           </div>
+          <p className="text-center text-gray-500 text-xs my-3 font-semibold">
+            Are you New to this website?{" "}
+            <span className="text-red-700">
+              <Link to="/singUp">SingUp</Link>
+            </span>
+          </p>
         </form>
         <p className="text-center text-gray-500 text-xs">
           &copy;2023 Acme Corp. All rights reserved.
