@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "vite build --open",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview --open"
   },
   "dependencies": {
     "localforage": "^1.10.0",
